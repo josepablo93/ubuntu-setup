@@ -73,6 +73,11 @@ install_vs_code(){
   sudo apt-get -y install code
 }
 
+install_rust(){
+  echo "installing rust"
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+}
+
 main(){
   echo "starting!"
 
@@ -83,7 +88,7 @@ main(){
   install_docker
   install_vm
   install_vs_code
-
+  install_rust
   echo "we are done! Please reboot your machine"
 }
 
