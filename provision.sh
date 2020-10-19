@@ -61,6 +61,19 @@ install_docker(){
   docker-compose --version
 }
 
+install_k8s() {
+  echo "starting minikube isntallation"
+  wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+  chmod +x minikube-linux-amd64
+  sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+
+  echo "installing kubectl"
+  curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+  chmod +x ./kubectl
+  sudo mv ./kubectl /usr/local/bin/kubectl
+  echo "don't forget to do 'minikube start'!"
+}
+
 install_vm(){
   echo "installing kvm"
   sudo apt -y install qemu qemu-kvm libvirt-bin bridge-utils virt-manager
