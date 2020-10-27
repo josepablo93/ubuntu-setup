@@ -20,24 +20,29 @@ install_dependencies(){
   sudo dpkg -i gitkraken-amd64.deb
   
   echo "installing arc theme"
-  sudo add-apt-repository ppa:noobslab/themes
-  sudo add-apt-repository ppa:noobslab/icons
-  sudo apt-get -y update
   sudo apt-get -y install arc-theme arc-icons
 
   echo "installing oh-my-zsh!"
   sudo apt-get -y install zsh git-core
   wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
   sudo chsh -s `which zsh`
+  chsh -s `which zsh`
   echo $SHELL
 
 }
 
 setup_dotfiles(){
   echo "setting up dotfiles"
+  rm ~/.zshrc
+  rm ~/.config/terminator/config
+
   ln -s dotfiles/zshrc ~/.zshrc
   ln -s dotfiles/vimrc ~/.vimrc
-  cp dotfiles/terminator ~/.config/terminator/config
+  ln -s dotfiles/terminator ~/.config/terminator/config
+
+  mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+  curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
 }
 
 install_docker(){
@@ -83,7 +88,13 @@ install_vm(){
 
 install_vs_code(){
   echo "installing vs code"
-  sudo apt-get -y install code
+  sudo snap install --classic code
+}
+
+install_nodejs(){
+  echo "installing nodeJs"
+  curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+  sudo apt-get install -y nodejs
 }
 
 install_rust(){
@@ -101,7 +112,9 @@ main(){
   install_docker
   install_vm
   install_vs_code
+  install_nodejs
   install_rust
+  
   echo "we are done! Please reboot your machine"
 }
 
