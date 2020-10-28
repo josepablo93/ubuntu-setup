@@ -1,3 +1,4 @@
 # My Ubuntu Setup
-chmod +x provision.sh  
-Have a submodule of dotfiles for setting the config files  
+1. `chmod +x provision.sh`
+2. have the ssh config files correctly for connecting to github
+3. Have a submodule of dotfiles in `~/`
